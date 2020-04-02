@@ -4,6 +4,7 @@ import sys
 import math
 import copy
 import numpy as np
+import lab8
 
 def inverseKinematics(l1, l2, x, y):
     t2 = math.acos((x**2 + y**2 - l1**2 - l2**2) / (2*l1*l2))
@@ -63,6 +64,8 @@ if __name__ == '__main__':
         # Get current waypoint
         t1, t2 = inverseKinematics(l1, l2, x, y)
         print(x, y, math.degrees(t1), math.degrees(t2))
+        grid, configSpace = lab8.makeGrid()
+        lab8.drawGrid(grid, configSpace, t1, t2)
         for timeStep in range(stepsForEachMove):
             
             print(timeStep*0.02)
@@ -70,7 +73,7 @@ if __name__ == '__main__':
 
             # Control arm to reach this waypoint
             # [cos1 sin1 cos2 sin2 t1dot t2dot]
-            curt1 = math.atan2(state[1], state[0]) - (math.pi/2)
+            curt1 = math.atan2(state[1], state[0])
             if abs(curt1 - t1) > 2*math.pi:
                 fix = 2*math.pi
             else:

@@ -14,8 +14,11 @@ def makeGrid():
     grid[6, 1] = 3
 
     configSpace =getConfigSpace(grid)
-    runDrawing(grid, configSpace)
+    return grid, configSpace
 
+def drawGrid():
+    grid, configSpace = makeGrid()
+    runDrawing(grid, configSpace)
     
 def getConfigSpace(grid):
     configSpace = np.zeros([360, 180])
@@ -104,6 +107,7 @@ def runDrawing(grid, configSpace, width=(14*50+20) + 60 + 360+100, height=720+50
     draw(canvas, width, height, grid, configSpace)
     root.mainloop()
     print("bye!")
-    
-makeGrid()
+
+if __name__ == "__main__":
+    drawGrid()
 
